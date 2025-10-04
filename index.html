@@ -1,179 +1,120 @@
 <!doctype html>
 <html lang="pl">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>RageMaciusie • Minecraft Nation</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RageMaciusie • Minecraft Nation</title>
 
-  <!-- Premium Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&family=Press+Start+2P&display=swap" rel="stylesheet">
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&family=Press+Start+2P&display=swap" rel="stylesheet">
 
-  <style>
-    /* Reset */
-    * {margin:0; padding:0; box-sizing:border-box;}
-    body,html {height:100%; font-family:"Poppins",sans-serif;}
+<!-- Favicon Minecraft dirt block -->
+<link rel="icon" href="images/favicon-minecraft.png" type="image/png">
 
-    /* Slider background */
-    .slider {
-      position: fixed;
-      top:0; left:0;
-      width:100%; height:100%;
-      z-index:-1;
-      overflow:hidden;
-    }
-    .slide {
-      position:absolute;
-      width:100%; height:100%;
-      background-size:cover;
-      background-position:center;
-      opacity:0;
-      transition:opacity 2s ease-in-out;
-      filter:brightness(0.65);
-    }
-    .slide.active {opacity:1;}
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html,body{height:100%;font-family:'Poppins',sans-serif;overflow-x:hidden;}
+  body{color:#fff;background:#071217;display:flex;justify-content:center;align-items:center;padding:20px;}
 
-    /* Overlay */
-    .overlay {
-      position:relative;
-      min-height:100vh;
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      justify-content:center;
-      padding:40px 20px;
-      text-align:center;
-      color:#fff;
-    }
-    h1 {
-      font-family: "Press Start 2P", cursive;
-      font-size:40px;
-      margin-bottom:12px;
-      color:#6bc8a1;
-      text-shadow:4px 4px 0 #000;
-      animation:fadeDown 1.5s ease;
-    }
-    p.subtitle {
-      font-size:22px;
-      color:#eee;
-      margin-bottom:30px;
-      font-weight:500;
-      animation:fadeDown 2s ease;
-    }
+  /* Slider */
+  .slider{position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;overflow:hidden;}
+  .slide{position:absolute;width:100%;height:100%;background-size:cover;background-position:center;opacity:0;transition:opacity 2s ease-in-out;filter:brightness(0.65);}
+  .slide.active{opacity:1;}
 
-    /* Buttons */
-    .btn {
-      display:inline-block;
-      background:#6bc8a1;
-      color:#111;
-      padding:14px 28px;
-      border-radius:10px;
-      font-weight:600;
-      text-decoration:none;
-      margin:10px;
-      font-size:18px;
-      letter-spacing:0.5px;
-      transition:transform .25s, background .3s, box-shadow .3s;
-      box-shadow:0 6px 18px rgba(0,0,0,0.6);
-    }
-    .btn:hover {
-      transform:translateY(-4px) scale(1.05);
-      background:#58a085;
-      box-shadow:0 8px 22px rgba(0,0,0,0.7);
-    }
+  /* Floating blocks */
+  .blocks{position:absolute;inset:0;pointer-events:none;}
+  .block{position:absolute;width:12px;height:12px;background:linear-gradient(180deg, rgba(255,255,255,0.06), rgba(0,0,0,0.06));opacity:0.6;border-radius:2px;filter:blur(0.4px);animation:float 6s linear infinite;}
+  .block.b1{left:12%;top:18%;animation-duration:8s}
+  .block.b2{left:78%;top:12%;animation-duration:10s}
+  .block.b3{left:50%;top:68%;animation-duration:7s}
+  @keyframes float{0%{transform:translateY(0)}50%{transform:translateY(-18px)}100%{transform:translateY(0)}}
 
-    /* Cards section */
-    .cards {
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-      gap:24px;
-      margin-top:60px;
-      width:100%;
-      max-width:1100px;
-    }
-    .card {
-      background:rgba(20,20,20,0.8);
-      border:2px solid #333;
-      border-radius:14px;
-      padding:28px 22px;
-      text-align:left;
-      color:#eee;
-      backdrop-filter: blur(10px);
-      transition:transform .4s, border-color .3s, box-shadow .3s;
-    }
-    .card:hover {
-      transform:translateY(-10px) scale(1.02);
-      border-color:#6bc8a1;
-      box-shadow:0 12px 28px rgba(0,0,0,0.7);
-    }
-    .card h2 {margin-bottom:14px; color:#6bc8a1; font-size:22px; font-weight:700;}
-    .card p {color:#ccc; font-size:15px; line-height:1.6;}
+  /* Overlay */
+  .overlay{position:relative;min-height:100vh;width:100%;max-width:1100px;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:20px 16px;}
+  h1{font-family:'Press Start 2P',cursive;font-size:38px;color:#6bc8a1;text-shadow:3px 3px 0 #000;margin-top:20px;animation:fadeDown 1.5s ease;}
+  @media(max-width:480px){h1{font-size:28px;}}
 
-    /* Footer */
-    footer {
-      margin-top:50px;
-      color:#aaa;
-      font-size:14px;
-      text-align:center;
-    }
+  p.subtitle{font-size:20px;color:#eee;margin:12px 0 30px;animation:fadeDown 2s ease;font-weight:500;}
 
-    /* Animations */
-    @keyframes fadeDown {
-      from {opacity:0; transform:translateY(-40px);}
-      to {opacity:1; transform:translateY(0);}
-    }
-  </style>
+  /* Buttons */
+  .btn{display:inline-block;background:#6bc8a1;color:#111;padding:14px 28px;border-radius:10px;font-weight:600;text-decoration:none;margin:10px;font-size:16px;letter-spacing:0.5px;transition:transform .25s, background .3s, box-shadow .3s;box-shadow:0 6px 18px rgba(0,0,0,0.6);}
+  .btn:hover{transform:translateY(-4px) scale(1.05);background:#58a085;box-shadow:0 8px 22px rgba(0,0,0,0.7);}
+
+  /* Cards */
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;margin-top:40px;width:100%;}
+  .card{background:rgba(20,20,20,0.8);border:2px solid #333;border-radius:14px;padding:20px;text-align:left;color:#eee;backdrop-filter:blur(10px);transition:transform .4s, border-color .3s, box-shadow .3s;}
+  .card:hover{transform:translateY(-8px) scale(1.02);border-color:#6bc8a1;box-shadow:0 12px 28px rgba(0,0,0,0.7);}
+  .card h2{margin-bottom:10px;color:#6bc8a1;font-size:20px;font-weight:700;}
+  .card p{color:#ccc;font-size:14px;line-height:1.5;}
+
+  /* Map */
+  .map-container{margin-top:30px;width:100%;height:400px;border-radius:12px;overflow:hidden;box-shadow:0 10px 24px rgba(0,0,0,0.6);}
+  .map-container iframe{width:100%;height:100%;border:0;}
+
+  /* Footer */
+  footer{margin-top:40px;color:#aaa;font-size:14px;text-align:center;}
+
+  /* Animations */
+  @keyframes fadeDown{from{opacity:0;transform:translateY(-40px);}to{opacity:1;transform:translateY(0);}}
+</style>
 </head>
 <body>
 
-  <!-- Background Slider -->
-  <div class="slider">
-    <div class="slide active" style="background-image:url('did-you-see-the-new-minecraft-1-20-wallpapers-theyre-nice-v0-l6ipv3olkt4b1.jpg')"></div>
-    <div class="slide" style="background-image:url('minecraft-tapeta-na-pulpit-8.jpg')"></div>
-    <div class="slide" style="background-image:url('minecraft-tapeta-na-pulpit-32.jpg')"></div>
+<!-- Background Slider -->
+<div class="slider">
+  <div class="slide active" style="background-image:url('did-you-see-the-new-minecraft-1-20-wallpapers-theyre-nice-v0-l6ipv3olkt4b1.jpg')"></div>
+  <div class="slide" style="background-image:url('minecraft-tapeta-na-pulpit-8.jpg')"></div>
+  <div class="slide" style="background-image:url('minecraft-tapeta-na-pulpit-32.jpg')"></div>
+</div>
+
+<!-- Floating blocks -->
+<div class="blocks">
+  <div class="block b1"></div>
+  <div class="block b2"></div>
+  <div class="block b3"></div>
+</div>
+
+<div class="overlay">
+  <h1>RageMaciusie</h1>
+  <p class="subtitle">Państwo na serwerze <strong>mcrekus.eu</strong></p>
+
+  <div>
+    <a href="https://discord.gg/zh7DYG3mk2" target="_blank" class="btn">Discord państwa</a>
+    <a href="https://discord.gg/mcrekus-eu-serwer-earthsmp-897875199922425937" target="_blank" class="btn">Discord mcrekus</a>
+    <a href="https://mapa.mcrekus.eu/#minecraft_overworld;flat;-4092,64,1128;2" target="_blank" class="btn">Otwórz mapę</a>
   </div>
 
-  <div class="overlay">
-    <h1>RageMaciusie</h1>
-    <p class="subtitle">Państwo na serwerze <strong>mcrekus.eu</strong></p>
-
-    <div>
-      <a href="https://discord.gg/zh7DYG3mk2" target="_blank" class="btn">Discord państwa</a>
-      <a href="https://discord.gg/mcrekus-eu-serwer-earthsmp-897875199922425937" target="_blank" class="btn">Discord mcrekus</a>
-      <a href="https://mapa.mcrekus.eu/#minecraft_overworld;flat;-4092,64,1128;2" target="_blank" class="btn">Mapa serwera</a>
+  <div class="cards">
+    <div class="card">
+      <h2>🌍 Informacje</h2>
+      <p>Wersje serwera: <strong>1.19.4 – 1.21.x</strong><br>Adres: <strong>mcrekus.eu</strong><br>Państwo: <strong>RageMaciusie</strong></p>
     </div>
-
-    <div class="cards">
-      <div class="card">
-        <h2>🌍 Informacje</h2>
-        <p>Wersje serwera: <strong>1.19.4 – 1.21.x</strong><br>
-        Adres: <strong>mcrekus.eu</strong><br>
-        Państwo: <strong>RageMaciusie</strong></p>
-      </div>
-      <div class="card">
-        <h2>🗺️ Mapa</h2>
-        <p>Zobacz szczegółową mapę świata i lokalizację RageMaciusie.<br>
-        <a href="https://mapa.mcrekus.eu/#minecraft_overworld;flat;-4092,64,1128;2" target="_blank" class="btn">Otwórz mapę</a></p>
-      </div>
-      <div class="card">
-        <h2>💬 Dołącz</h2>
-        <p>Dołącz do społeczności na Discordzie, poznaj innych graczy i rozwijaj państwo RageMaciusie razem z nami!</p>
+    <div class="card">
+      <h2>🗺️ Mapa</h2>
+      <p>Zobacz lokalizację RageMaciusie bezpośrednio na stronie:</p>
+      <div class="map-container">
+        <iframe src="https://mapa.mcrekus.eu/#minecraft_overworld;flat;-4092,64,1128;2" loading="lazy" title="Mapa RageMaciusie"></iframe>
       </div>
     </div>
-
-    <footer>
-      &copy; 2025 RageMaciusie • Stworzone dla serwera mcrekus.eu
-    </footer>
+    <div class="card">
+      <h2>💬 Dołącz</h2>
+      <p>Dołącz do społeczności na Discordzie i rozwijaj państwo RageMaciusie razem z nami!</p>
+    </div>
   </div>
 
-  <script>
-    // Slider rotation
-    let slides = document.querySelectorAll('.slide');
-    let idx = 0;
-    setInterval(()=>{
-      slides[idx].classList.remove('active');
-      idx = (idx+1)%slides.length;
-      slides[idx].classList.add('active');
-    }, 7000);
-  </script>
+  <footer>
+    &copy; 2025 RageMaciusie • Premium Minecraft Page • mcrekus.eu
+  </footer>
+</div>
+
+<script>
+  // Slider
+  let slides=document.querySelectorAll('.slide');let idx=0;
+  setInterval(()=>{
+    slides[idx].classList.remove('active');
+    idx=(idx+1)%slides.length;
+    slides[idx].classList.add('active');
+  },7000);
+</script>
 </body>
 </html>
