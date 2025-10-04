@@ -4,135 +4,201 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>RageMaciusie • mcrekus.eu</title>
-  <meta name="description" content="Strona państwa RageMaciusie na serwerze mcrekus.eu — linki do Discorda i mapy serwera.">
+  <meta name="description" content="Państwo RageMaciusie — Discord, mapa, informacje o serwerze mcrekus.eu">
   <style>
-    :root{
-      --bg:#0f1724;
-      --card:#0b1220;
-      --accent:#06b6d4;
-      --muted:#94a3b8;
-      --glass: rgba(255,255,255,0.03);
-      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    :root {
+      --bg: #1a1f24;
+      --tile1: #334057;
+      --tile2: #283440;
+      --accent: #6bc8a1;
+      --text: #e6e6e6;
+      --muted: #98a8b3;
+      --border: #22303f;
     }
-    *{box-sizing:border-box}
-    body{margin:0;min-height:100vh;background:linear-gradient(180deg,#071028 0%,var(--bg) 100%);color:#e6eef6;display:flex;align-items:center;justify-content:center;padding:32px}
-    .wrap{width:100%;max-width:980px}
-    header{display:flex;gap:16px;align-items:center;margin-bottom:20px}
-    .logo{width:80px;height:80px;background:linear-gradient(135deg,var(--accent),#7c3aed);border-radius:16px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:20px;color:#031022;box-shadow:0 6px 18px rgba(6,11,19,0.6)}
-    h1{font-size:22px;margin:0}
-    p.lead{color:var(--muted);margin:4px 0 0}
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .container {
+      width: 100%;
+      max-width: 900px;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+    header .logo {
+      font-size: 48px;
+      font-weight: bold;
+      color: var(--accent);
+      margin-bottom: 8px;
+      text-shadow: 2px 2px 0 var(--border);
+    }
+    header h1 {
+      font-size: 28px;
+      color: var(--text);
+    }
+    header p {
+      color: var(--muted);
+      margin-top: 6px;
+    }
 
-    .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:18px}
-    @media (max-width:720px){.grid{grid-template-columns:1fr}}
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
 
-    .card{background:var(--card);padding:16px;border-radius:12px;box-shadow:0 6px 18px rgba(2,6,23,0.6);border:1px solid rgba(255,255,255,0.03)}
-    .card h3{margin:0 0 8px}
-    .small{color:var(--muted);font-size:13px}
+    .card {
+      background: var(--tile1);
+      border: 2px solid var(--border);
+      border-radius: 8px;
+      padding: 16px;
+      transition: transform 0.2s;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent);
+    }
+    .card h2 {
+      font-size: 20px;
+      margin-bottom: 8px;
+    }
+    .card p {
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 12px;
+    }
+    .btn {
+      display: inline-block;
+      background: var(--accent);
+      color: var(--bg);
+      padding: 10px 16px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 600;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    }
+    .btn:hover {
+      background: #58a085;
+    }
+    .linkbox {
+      margin-top: 12px;
+      word-break: break-all;
+      background: var(--tile2);
+      padding: 8px;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+      font-family: monospace;
+      color: var(--text);
+      font-size: 13px;
+    }
 
-    .btn{display:inline-flex;gap:8px;align-items:center;padding:10px 12px;border-radius:10px;background:linear-gradient(180deg,rgba(255,255,255,0.02),var(--glass));border:1px solid rgba(255,255,255,0.04);cursor:pointer;text-decoration:none;color:inherit;font-weight:600}
-    .btn:hover{transform:translateY(-2px)}
-    .btn .dot{width:10px;height:10px;background:var(--accent);border-radius:50%}
+    .map-container {
+      margin-top: 24px;
+      border: 2px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      height: 360px;
+    }
+    .map-container iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
 
-    .linkline{font-family:monospace;background:rgba(255,255,255,0.02);padding:8px;border-radius:8px;display:flex;gap:8px;align-items:center}
-    .linkline code{overflow:auto;white-space:nowrap}
+    footer {
+      margin-top: 24px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 14px;
+    }
 
-    .mapwrap{height:360px;border-radius:10px;overflow:hidden;border:1px solid rgba(255,255,255,0.04)}
-    iframe{width:100%;height:100%;border:0}
-
-    footer{margin-top:16px;color:var(--muted);font-size:13px;text-align:center}
-
-    .copy{padding:8px 10px;border-radius:8px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.03);cursor:pointer}
+    .copy-btn {
+      background: var(--accent);
+      color: var(--bg);
+      border: none;
+      padding: 8px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 600;
+      margin-left: 8px;
+    }
+    .copy-btn:hover {
+      background: #58a085;
+    }
   </style>
 </head>
 <body>
-  <main class="wrap">
+  <div class="container">
     <header>
-      <div class="logo">RM</div>
-      <div>
-        <h1>RageMaciusie — państwo na mcrekus.eu</h1>
-        <p class="lead">Linki do Discordów i mapy serwera. Kliknij przycisk, aby otworzyć lub skopiować.</p>
-      </div>
+      <div class="logo">RageMaciusie</div>
+      <h1>Państwo na serwerze mcrekus.eu</h1>
+      <p>Discord | Mapa | Informacje</p>
     </header>
 
-    <section class="grid">
+    <div class="grid">
       <div class="card">
-        <h3>Discord państwa • RageMaciusie</h3>
-        <p class="small">Oficjalny zaproszenie do Discorda Twojego państwa.</p>
-
-        <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap;align-items:center">
-          <a class="btn" href="https://discord.gg/zh7DYG3mk2" target="_blank" rel="noopener noreferrer">
-            <span class="dot"></span>
-            Otwórz Discord państwa
-          </a>
-          <button class="copy" onclick="copyText('https://discord.gg/zh7DYG3mk2')">Kopiuj link</button>
-        </div>
-
-        <div style="margin-top:12px" class="linkline"><code>https://discord.gg/zh7DYG3mk2</code></div>
+        <h2>Discord państwa</h2>
+        <p>Zaproszenie do Discorda Twojego państwa RageMaciusie.</p>
+        <a class="btn" href="https://discord.gg/zh7DYG3mk2" target="_blank" rel="noopener noreferrer">Otwórz Discord</a>
+        <div class="linkbox">https://discord.gg/zh7DYG3mk2</div>
       </div>
 
       <div class="card">
-        <h3>Discord serwera • mcrekus</h3>
-        <p class="small">Oficjalny serwer Discord projektu mcrekus.</p>
-
-        <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap;align-items:center">
-          <a class="btn" href="https://discord.gg/mcrekus-eu-serwer-earthsmp-897875199922425937" target="_blank" rel="noopener noreferrer">
-            <span class="dot"></span>
-            Otwórz Discord mcrekus
-          </a>
-          <button class="copy" onclick="copyText('https://discord.gg/mcrekus-eu-serwer-earthsmp-897875199922425937')">Kopiuj link</button>
-        </div>
-
-        <div style="margin-top:12px" class="linkline"><code>https://discord.gg/mcrekus-eu-serwer-earthsmp-897875199922425937</code></div>
+        <h2>Discord serwera</h2>
+        <p>Oficjalny Discord serwera mcrekus.</p>
+        <a class="btn" href="https://discord.gg/mcrekus-eu-serwer-earthsmp-897875199922425937" target="_blank" rel="noopener noreferrer">Otwórz Discord mcrekus</a>
+        <div class="linkbox">https://discord.gg/mcrekus-eu-serwer-earthsmp-897875199922425937</div>
       </div>
 
       <div class="card">
-        <h3>Mapa serwera • mcrekus</h3>
-        <p class="small">Wskaż pozycję Twojego państwa na mapie serwera.</p>
-
-        <div style="margin-top:12px;display:flex;gap:8px;align-items:center;flex-wrap:wrap">
-          <a class="btn" href="https://mapa.mcrekus.eu/#minecraft_overworld;flat;-4212,64,1920;2" target="_blank" rel="noopener noreferrer">
-            <span class="dot"></span>
-            Otwórz Mapę
-          </a>
-          <button class="copy" onclick="copyText('https://mapa.mcrekus.eu/#minecraft_overworld;flat;-4212,64,1920;2')">Kopiuj link</button>
-        </div>
-
-        <div style="margin-top:12px" class="linkline"><code>https://mapa.mcrekus.eu/#minecraft_overworld;flat;-4212,64,1920;2</code></div>
+        <h2>Mapa serwera</h2>
+        <p>Pokażemy ci pozycję twojego państwa na mapie świata mcrekus.</p>
+        <a class="btn" href="https://mapa.mcrekus.eu/#minecraft_overworld;flat;-4092,64,1128;2" target="_blank" rel="noopener noreferrer">Otwórz mapę</a>
+        <div class="linkbox">https://mapa.mcrekus.eu/#minecraft_overworld;flat;-4092,64,1128;2</div>
       </div>
 
       <div class="card">
-        <h3>Info serwera</h3>
-        <p class="small">Wersje klienta obsługiwane przez serwer (zgodnie z Twoją informacją).</p>
-        <ul style="margin:10px 0 0;padding-left:18px;color:var(--muted)">
-          <li>Obsługiwane wersje: <strong>1.19.4 → 1.21.x</strong></li>
+        <h2>Informacje o serwerze</h2>
+        <p>Ogólne dane techniczne i wersje obsługiwane.</p>
+        <ul style="color: var(--text); margin-top: 8px; font-size: 14px;">
+          <li>Wersje: <strong>1.19.4 – 1.21.x</strong></li>
           <li>Nazwa państwa: <strong>RageMaciusie</strong></li>
-          <li>Adres serwera: <strong>mcrekus.eu</strong></li>
+          <li>Adres: <strong>mcrekus.eu</strong></li>
         </ul>
       </div>
-    </section>
+    </div>
 
-    <section style="margin-top:18px" class="card">
-      <h3>Mapa (podgląd)</h3>
-      <p class="small">Jeśli strona blokuje wczytywanie w iframe, użyj przycisku "Otwórz Mapę".</p>
-      <div class="mapwrap" style="margin-top:12px">
-        <iframe src="https://mapa.mcrekus.eu/#minecraft_overworld;flat;-4212,64,1920;2" loading="lazy" title="Mapa mcrekus"></iframe>
-      </div>
-      <p style="margin-top:10px;color:var(--muted);font-size:13px">Współrzędne przycisku mapy: <code>-4212, 64, 1920</code></p>
+    <section class="map-container">
+      <iframe src="https://mapa.mcrekus.eu/#minecraft_overworld;flat;-4092,64,1128;2" loading="lazy" title="Mapa mcrekus"></iframe>
     </section>
 
     <footer>
-      Strona RageMaciusie © 2025 • Wykonana dla państwa na serwerze mcrekus.eu
+      Strona RageMaciusie &bull; 2025 • Stworzona dla serwera mcrekus.eu
     </footer>
-  </main>
+  </div>
 
   <script>
-    function copyText(text){
-      navigator.clipboard?.writeText(text).then(()=>{
-        alert('Skopiowano: ' + text);
-      }).catch(()=>{
-        prompt('Skopiuj ręcznie:', text);
+    // funkcja pomocnicza do kopiowania linków
+    document.querySelectorAll('.linkbox').forEach(box => {
+      box.addEventListener('click', () => {
+        const txt = box.textContent;
+        navigator.clipboard.writeText(txt).then(() => {
+          alert('Skopiowano: ' + txt);
+        }).catch(() => {
+          prompt('Skopiuj ręcznie:', txt);
+        });
       });
-    }
+    });
   </script>
 </body>
 </html>
