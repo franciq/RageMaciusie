@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>RageMaciusie • mcrekus.eu</title>
+  <meta name="description" content="Strona państwa RageMaciusie na serwerze mcrekus.eu — linki do Discorda i mapy serwera.">
+  <style>
+    :root{
+      --bg:#0f1724;
+      --card:#0b1220;
+      --accent:#06b6d4;
+      --muted:#94a3b8;
+      --glass: rgba(255,255,255,0.03);
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;min-height:100vh;background:linear-gradient(180deg,#071028 0%,var(--bg) 100%);color:#e6eef6;display:flex;align-items:center;justify-content:center;padding:32px}
+    .wrap{width:100%;max-width:980px}
+    header{display:flex;gap:16px;align-items:center;margin-bottom:20px}
+    .logo{width:80px;height:80px;background:linear-gradient(135deg,var(--accent),#7c3aed);border-radius:16px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:20px;color:#031022;box-shadow:0 6px 18px rgba(6,11,19,0.6)}
+    h1{font-size:22px;margin:0}
+    p.lead{color:var(--muted);margin:4px 0 0}
+
+    .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:18px}
+    @media (max-width:720px){.grid{grid-template-columns:1fr}}
+
+    .card{background:var(--card);padding:16px;border-radius:12px;box-shadow:0 6px 18px rgba(2,6,23,0.6);border:1px solid rgba(255,255,255,0.03)}
+    .card h3{margin:0 0 8px}
+    .small{color:var(--muted);font-size:13px}
+
+    .btn{display:inline-flex;gap:8px;align-items:center;padding:10px 12px;border-radius:10px;background:linear-gradient(180deg,rgba(255,255,255,0.02),var(--glass));border:1px solid rgba(255,255,255,0.04);cursor:pointer;text-decoration:none;color:inherit;font-weight:600}
+    .btn:hover{transform:translateY(-2px)}
+    .btn .dot{width:10px;height:10px;background:var(--accent);border-radius:50%}
+
+    .linkline{font-family:monospace;background:rgba(255,255,255,0.02);padding:8px;border-radius:8px;display:flex;gap:8px;align-items:center}
+    .linkline code{overflow:auto;white-space:nowrap}
+
+    .mapwrap{height:360px;border-radius:10px;overflow:hidden;border:1px solid rgba(255,255,255,0.04)}
+    iframe{width:100%;height:100%;border:0}
+
+    footer{margin-top:16px;color:var(--muted);font-size:13px;text-align:center}
+
+    .copy{padding:8px 10px;border-radius:8px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.03);cursor:pointer}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <header>
+      <div class="logo">RM</div>
+      <div>
+        <h1>RageMaciusie — państwo na mcrekus.eu</h1>
+        <p class="lead">Linki do Discordów i mapy serwera. Kliknij przycisk, aby otworzyć lub skopiować.</p>
+      </div>
+    </header>
+
+    <section class="grid">
+      <div class="card">
+        <h3>Discord państwa • RageMaciusie</h3>
+        <p class="small">Oficjalny zaproszenie do Discorda Twojego państwa.</p>
+
+        <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+          <a class="btn" href="https://discord.gg/zh7DYG3mk2" target="_blank" rel="noopener noreferrer">
+            <span class="dot"></span>
+            Otwórz Discord państwa
+          </a>
+          <button class="copy" onclick="copyText('https://discord.gg/zh7DYG3mk2')">Kopiuj link</button>
+        </div>
+
+        <div style="margin-top:12px" class="linkline"><code>https://discord.gg/zh7DYG3mk2</code></div>
+      </div>
+
+      <div class="card">
+        <h3>Discord serwera • mcrekus</h3>
+        <p class="small">Oficjalny serwer Discord projektu mcrekus.</p>
+
+        <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+          <a class="btn" href="https://discord.gg/mcrekus-eu-serwer-earthsmp-897875199922425937" target="_blank" rel="noopener noreferrer">
+            <span class="dot"></span>
+            Otwórz Discord mcrekus
+          </a>
+          <button class="copy" onclick="copyText('https://discord.gg/mcrekus-eu-serwer-earthsmp-897875199922425937')">Kopiuj link</button>
+        </div>
+
+        <div style="margin-top:12px" class="linkline"><code>https://discord.gg/mcrekus-eu-serwer-earthsmp-897875199922425937</code></div>
+      </div>
+
+      <div class="card">
+        <h3>Mapa serwera • mcrekus</h3>
+        <p class="small">Wskaż pozycję Twojego państwa na mapie serwera.</p>
+
+        <div style="margin-top:12px;display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+          <a class="btn" href="https://mapa.mcrekus.eu/#minecraft_overworld;flat;-4212,64,1920;2" target="_blank" rel="noopener noreferrer">
+            <span class="dot"></span>
+            Otwórz Mapę
+          </a>
+          <button class="copy" onclick="copyText('https://mapa.mcrekus.eu/#minecraft_overworld;flat;-4212,64,1920;2')">Kopiuj link</button>
+        </div>
+
+        <div style="margin-top:12px" class="linkline"><code>https://mapa.mcrekus.eu/#minecraft_overworld;flat;-4212,64,1920;2</code></div>
+      </div>
+
+      <div class="card">
+        <h3>Info serwera</h3>
+        <p class="small">Wersje klienta obsługiwane przez serwer (zgodnie z Twoją informacją).</p>
+        <ul style="margin:10px 0 0;padding-left:18px;color:var(--muted)">
+          <li>Obsługiwane wersje: <strong>1.19.4 → 1.21.x</strong></li>
+          <li>Nazwa państwa: <strong>RageMaciusie</strong></li>
+          <li>Adres serwera: <strong>mcrekus.eu</strong></li>
+        </ul>
+      </div>
+    </section>
+
+    <section style="margin-top:18px" class="card">
+      <h3>Mapa (podgląd)</h3>
+      <p class="small">Jeśli strona blokuje wczytywanie w iframe, użyj przycisku "Otwórz Mapę".</p>
+      <div class="mapwrap" style="margin-top:12px">
+        <iframe src="https://mapa.mcrekus.eu/#minecraft_overworld;flat;-4212,64,1920;2" loading="lazy" title="Mapa mcrekus"></iframe>
+      </div>
+      <p style="margin-top:10px;color:var(--muted);font-size:13px">Współrzędne przycisku mapy: <code>-4212, 64, 1920</code></p>
+    </section>
+
+    <footer>
+      Strona RageMaciusie © 2025 • Wykonana dla państwa na serwerze mcrekus.eu
+    </footer>
+  </main>
+
+  <script>
+    function copyText(text){
+      navigator.clipboard?.writeText(text).then(()=>{
+        alert('Skopiowano: ' + text);
+      }).catch(()=>{
+        prompt('Skopiuj ręcznie:', text);
+      });
+    }
+  </script>
+</body>
+</html>
